@@ -1,0 +1,9 @@
+.idea/
+
+/node_modules/
+/public/build/
+
+/client/pluto/node_modules/*
+/server/node_modules/*
+
+.DS_Store
