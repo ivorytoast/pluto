@@ -11,7 +11,7 @@
 
     let sessionId = "B1212390"
 
-    let URL = "http://proxy.titan-backend-nyc.com/"
+    let URL = "https://proxy.titan-backend-nyc.com/"
 
     // Get
     let LATEST_BOARD = "/db/board/" // "/db/board/{id}"
