@@ -31,13 +31,12 @@ console.log(playersInSession)
 
 async function doPost(sessionId) {
     let urlToQuery = URL + LATEST_BOARD + sessionId;
-    const res = await fetch(urlToQuery, {
+    const response = await fetch(urlToQuery, {
         method: 'POST',
-        body: JSON.stringify({
-            foo,
-            bar
-        })
+        body: JSON.stringify({foo, bar})
     })
+    const output = await response
+    console.log(output)
 }
 
 const json = await res.json()

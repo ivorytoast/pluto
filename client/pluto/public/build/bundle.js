@@ -5783,7 +5783,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file = "src/App.svelte";
 
-    // (46:8) <Route path="session">
+    // (141:8) <Route path="session">
     function create_default_slot_6(ctx) {
     	let session;
     	let current;
@@ -5815,14 +5815,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_6.name,
     		type: "slot",
-    		source: "(46:8) <Route path=\\\"session\\\">",
+    		source: "(141:8) <Route path=\\\"session\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (50:8) <Route path="stratego">
+    // (145:8) <Route path="stratego">
     function create_default_slot_5(ctx) {
     	let stratego;
     	let current;
@@ -5854,14 +5854,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5.name,
     		type: "slot",
-    		source: "(50:8) <Route path=\\\"stratego\\\">",
+    		source: "(145:8) <Route path=\\\"stratego\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (54:8) <Route path="account">
+    // (149:8) <Route path="account">
     function create_default_slot_4(ctx) {
     	let createaccount;
     	let current;
@@ -5893,14 +5893,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(54:8) <Route path=\\\"account\\\">",
+    		source: "(149:8) <Route path=\\\"account\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (58:8) <Route path="chat">
+    // (153:8) <Route path="chat">
     function create_default_slot_3(ctx) {
     	let chat;
     	let current;
@@ -5932,14 +5932,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(58:8) <Route path=\\\"chat\\\">",
+    		source: "(153:8) <Route path=\\\"chat\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (62:8) <Route path="lobby">
+    // (157:8) <Route path="lobby">
     function create_default_slot_2(ctx) {
     	let lobby;
     	let current;
@@ -5971,14 +5971,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(62:8) <Route path=\\\"lobby\\\">",
+    		source: "(157:8) <Route path=\\\"lobby\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (66:8) <Route path="/">
+    // (161:8) <Route path="/">
     function create_default_slot_1(ctx) {
     	let login;
     	let current;
@@ -6010,14 +6010,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(66:8) <Route path=\\\"/\\\">",
+    		source: "(161:8) <Route path=\\\"/\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (44:0) <Router>
+    // (139:0) <Router>
     function create_default_slot(ctx) {
     	let main;
     	let route0;
@@ -6110,7 +6110,7 @@ var app = (function () {
     			create_component(route5.$$.fragment);
     			t5 = space();
     			create_component(route6.$$.fragment);
-    			add_location(main, file, 44, 4, 1339);
+    			add_location(main, file, 139, 4, 4220);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
@@ -6132,42 +6132,42 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const route0_changes = {};
 
-    			if (dirty & /*$$scope*/ 1024) {
+    			if (dirty & /*$$scope*/ 134217728) {
     				route0_changes.$$scope = { dirty, ctx };
     			}
 
     			route0.$set(route0_changes);
     			const route1_changes = {};
 
-    			if (dirty & /*$$scope*/ 1024) {
+    			if (dirty & /*$$scope*/ 134217728) {
     				route1_changes.$$scope = { dirty, ctx };
     			}
 
     			route1.$set(route1_changes);
     			const route2_changes = {};
 
-    			if (dirty & /*$$scope*/ 1024) {
+    			if (dirty & /*$$scope*/ 134217728) {
     				route2_changes.$$scope = { dirty, ctx };
     			}
 
     			route2.$set(route2_changes);
     			const route3_changes = {};
 
-    			if (dirty & /*$$scope*/ 1024) {
+    			if (dirty & /*$$scope*/ 134217728) {
     				route3_changes.$$scope = { dirty, ctx };
     			}
 
     			route3.$set(route3_changes);
     			const route4_changes = {};
 
-    			if (dirty & /*$$scope*/ 1024) {
+    			if (dirty & /*$$scope*/ 134217728) {
     				route4_changes.$$scope = { dirty, ctx };
     			}
 
     			route4.$set(route4_changes);
     			const route5_changes = {};
 
-    			if (dirty & /*$$scope*/ 1024) {
+    			if (dirty & /*$$scope*/ 134217728) {
     				route5_changes.$$scope = { dirty, ctx };
     			}
 
@@ -6210,7 +6210,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(44:0) <Router>",
+    		source: "(139:0) <Router>",
     		ctx
     	});
 
@@ -6218,8 +6218,24 @@ var app = (function () {
     }
 
     function create_fragment(ctx) {
-    	let button;
+    	let button0;
     	let t1;
+    	let button1;
+    	let t3;
+    	let button2;
+    	let t5;
+    	let button3;
+    	let t7;
+    	let button4;
+    	let t9;
+    	let p0;
+    	let t10;
+    	let t11;
+    	let t12;
+    	let p1;
+    	let t13;
+    	let t14;
+    	let t15;
     	let router;
     	let current;
     	let mounted;
@@ -6235,30 +6251,81 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			button = element("button");
-    			button.textContent = "Players";
+    			button0 = element("button");
+    			button0.textContent = "New Session";
     			t1 = space();
+    			button1 = element("button");
+    			button1.textContent = "Join Session";
+    			t3 = space();
+    			button2 = element("button");
+    			button2.textContent = "Move";
+    			t5 = space();
+    			button3 = element("button");
+    			button3.textContent = "Latest Board";
+    			t7 = space();
+    			button4 = element("button");
+    			button4.textContent = "Players";
+    			t9 = space();
+    			p0 = element("p");
+    			t10 = text("Board: ");
+    			t11 = text(/*latestBoard*/ ctx[0]);
+    			t12 = space();
+    			p1 = element("p");
+    			t13 = text("Players In Session ");
+    			t14 = text(/*playersInSession*/ ctx[1]);
+    			t15 = space();
     			create_component(router.$$.fragment);
-    			add_location(button, file, 39, 0, 1257);
+    			add_location(button0, file, 115, 0, 3699);
+    			add_location(button1, file, 119, 0, 3786);
+    			add_location(button2, file, 123, 0, 3875);
+    			add_location(button3, file, 127, 0, 3973);
+    			add_location(button4, file, 131, 0, 4053);
+    			add_location(p0, file, 135, 0, 4133);
+    			add_location(p1, file, 136, 0, 4161);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, button, anchor);
+    			insert_dev(target, button0, anchor);
     			insert_dev(target, t1, anchor);
+    			insert_dev(target, button1, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, button2, anchor);
+    			insert_dev(target, t5, anchor);
+    			insert_dev(target, button3, anchor);
+    			insert_dev(target, t7, anchor);
+    			insert_dev(target, button4, anchor);
+    			insert_dev(target, t9, anchor);
+    			insert_dev(target, p0, anchor);
+    			append_dev(p0, t10);
+    			append_dev(p0, t11);
+    			insert_dev(target, t12, anchor);
+    			insert_dev(target, p1, anchor);
+    			append_dev(p1, t13);
+    			append_dev(p1, t14);
+    			insert_dev(target, t15, anchor);
     			mount_component(router, target, anchor);
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*getLatestBoard*/ ctx[1](/*sessionId*/ ctx[0]), false, false, false);
+    				dispose = [
+    					listen_dev(button0, "click", /*click_handler*/ ctx[15], false, false, false),
+    					listen_dev(button1, "click", /*click_handler_1*/ ctx[16], false, false, false),
+    					listen_dev(button2, "click", /*click_handler_2*/ ctx[17], false, false, false),
+    					listen_dev(button3, "click", /*click_handler_3*/ ctx[18], false, false, false),
+    					listen_dev(button4, "click", /*click_handler_4*/ ctx[19], false, false, false)
+    				];
+
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
+    			if (!current || dirty & /*latestBoard*/ 1) set_data_dev(t11, /*latestBoard*/ ctx[0]);
+    			if (!current || dirty & /*playersInSession*/ 2) set_data_dev(t14, /*playersInSession*/ ctx[1]);
     			const router_changes = {};
 
-    			if (dirty & /*$$scope*/ 1024) {
+    			if (dirty & /*$$scope*/ 134217728) {
     				router_changes.$$scope = { dirty, ctx };
     			}
 
@@ -6274,11 +6341,23 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(button);
+    			if (detaching) detach_dev(button0);
     			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(button1);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(button2);
+    			if (detaching) detach_dev(t5);
+    			if (detaching) detach_dev(button3);
+    			if (detaching) detach_dev(t7);
+    			if (detaching) detach_dev(button4);
+    			if (detaching) detach_dev(t9);
+    			if (detaching) detach_dev(p0);
+    			if (detaching) detach_dev(t12);
+    			if (detaching) detach_dev(p1);
+    			if (detaching) detach_dev(t15);
     			destroy_component(router, detaching);
     			mounted = false;
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -6296,34 +6375,111 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	let sessionId = "B1212390";
+    	let sessionId = "B1212710";
+    	let playerName = "Anthony";
+    	let joinerName = "Luke";
+    	let fromX = 1;
+    	let fromY = 0;
+    	let toX = 2;
+    	let toY = 0;
+    	let playerSide = "B";
 
-    	// let URL = "http://proxy.titan-backend-nyc.com/"
-    	let URL = "http://localhost:8080/";
+    	// let URL = "https://proxy.titan-backend-nyc.com"
+    	let URL = "http://localhost:8080";
 
     	// Get
-    	let LATEST_BOARD = "/db/board/"; // "/db/board/{id}"
+    	let LATEST_BOARD = "/game/db/board/"; // "/game/db/board/{id}"
 
-    	let PLAYERS_IN_SESSION = "/sessions/players/"; // "/sessions/players/{id}"
+    	let PLAYERS_IN_SESSION = "/game/sessions/players/"; // "/game/sessions/players/{id}"
 
     	// Post
-    	let UPDATE_BOARD = "/update/board";
+    	let UPDATE_BOARD = "/game/update/board";
 
-    	let MOVE = "/move";
-    	let NEW_SESSION = "/new/redis";
-    	let JOIN = "/join";
+    	let MOVE = "/game/move";
+    	let NEW_SESSION = "/game/new/redis";
+    	let JOIN_SESSION = "/game/join";
+    	let latestBoard = '';
+    	let playersInSession = '...';
 
-    	const getLatestBoard = async sessionId => {
+    	async function getLatestBoard(sessionId) {
+    		console.log("Running latest board");
     		let urlToQuery = URL + LATEST_BOARD + sessionId;
-    		const response = await fetch(urlToQuery);
-    		console.log(response);
-    	};
+    		$$invalidate(0, latestBoard = await (await fetch(urlToQuery)).text());
+    	}
 
-    	const getPlayersInSession = async sessionId => {
+    	async function getPlayersInSession(sessionId) {
     		let urlToQuery = URL + PLAYERS_IN_SESSION + sessionId;
-    		const response = await fetch(urlToQuery);
-    		console.log(response);
-    	};
+    		$$invalidate(1, playersInSession = await (await fetch(urlToQuery)).text());
+    	}
+
+    	async function newSession(sessionId, playerName) {
+    		let urlToQuery = URL + NEW_SESSION;
+    		const requestObject = { sessionId, playerName };
+    		let jsonRequest = JSON.stringify(requestObject);
+    		console.log(jsonRequest);
+
+    		const params = {
+    			headers: {
+    				'Accept': "application/json, text/plain, */*",
+    				'Content-Type': "application/json;charset=utf-8"
+    			},
+    			body: jsonRequest,
+    			method: "POST"
+    		};
+
+    		const response = await fetch(urlToQuery, params);
+    		const output = await response;
+    		console.log(output);
+    	}
+
+    	async function joinSession(sessionId, playerName) {
+    		let urlToQuery = URL + JOIN_SESSION;
+    		const requestObject = { sessionId, playerName };
+    		let jsonRequest = JSON.stringify(requestObject);
+    		console.log(jsonRequest);
+
+    		const params = {
+    			headers: {
+    				'Accept': "application/json, text/plain, */*",
+    				'Content-Type': "application/json;charset=utf-8"
+    			},
+    			body: jsonRequest,
+    			method: "POST"
+    		};
+
+    		const response = await fetch(urlToQuery, params);
+    		const output = await response;
+    		console.log(output);
+    	}
+
+    	async function move(sessionId, playerSide, fromX, fromY, toX, toY) {
+    		let urlToQuery = URL + MOVE;
+
+    		const requestObject = {
+    			sessionId,
+    			playerSide,
+    			fromX,
+    			fromY,
+    			toX,
+    			toY
+    		};
+
+    		let jsonRequest = JSON.stringify(requestObject);
+    		console.log(jsonRequest);
+
+    		const params = {
+    			headers: {
+    				'Accept': "application/json, text/plain, */*",
+    				'Content-Type': "application/json;charset=utf-8"
+    			},
+    			body: jsonRequest,
+    			method: "POST"
+    		};
+
+    		const response = await fetch(urlToQuery, params);
+    		const output = await response;
+    		console.log(output);
+    	}
 
     	const writable_props = [];
 
@@ -6331,10 +6487,15 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
+    	const click_handler = () => newSession(sessionId, playerName);
+    	const click_handler_1 = () => joinSession(sessionId, joinerName);
+    	const click_handler_2 = () => move(sessionId, playerSide, fromX, fromY, toX, toY);
+    	const click_handler_3 = () => getLatestBoard(sessionId);
+    	const click_handler_4 = () => getPlayersInSession(sessionId);
+
     	$$self.$capture_state = () => ({
-    		Router: Router$1,
     		Route: Route$1,
-    		Link: Link$1,
+    		Router: Router$1,
     		LogIn,
     		CreateAccount,
     		NotFoundPage,
@@ -6343,33 +6504,75 @@ var app = (function () {
     		Stratego,
     		Session,
     		sessionId,
+    		playerName,
+    		joinerName,
+    		fromX,
+    		fromY,
+    		toX,
+    		toY,
+    		playerSide,
     		URL,
     		LATEST_BOARD,
     		PLAYERS_IN_SESSION,
     		UPDATE_BOARD,
     		MOVE,
     		NEW_SESSION,
-    		JOIN,
+    		JOIN_SESSION,
+    		latestBoard,
+    		playersInSession,
     		getLatestBoard,
-    		getPlayersInSession
+    		getPlayersInSession,
+    		newSession,
+    		joinSession,
+    		move
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('sessionId' in $$props) $$invalidate(0, sessionId = $$props.sessionId);
+    		if ('sessionId' in $$props) $$invalidate(2, sessionId = $$props.sessionId);
+    		if ('playerName' in $$props) $$invalidate(3, playerName = $$props.playerName);
+    		if ('joinerName' in $$props) $$invalidate(4, joinerName = $$props.joinerName);
+    		if ('fromX' in $$props) $$invalidate(5, fromX = $$props.fromX);
+    		if ('fromY' in $$props) $$invalidate(6, fromY = $$props.fromY);
+    		if ('toX' in $$props) $$invalidate(7, toX = $$props.toX);
+    		if ('toY' in $$props) $$invalidate(8, toY = $$props.toY);
+    		if ('playerSide' in $$props) $$invalidate(9, playerSide = $$props.playerSide);
     		if ('URL' in $$props) URL = $$props.URL;
     		if ('LATEST_BOARD' in $$props) LATEST_BOARD = $$props.LATEST_BOARD;
     		if ('PLAYERS_IN_SESSION' in $$props) PLAYERS_IN_SESSION = $$props.PLAYERS_IN_SESSION;
     		if ('UPDATE_BOARD' in $$props) UPDATE_BOARD = $$props.UPDATE_BOARD;
     		if ('MOVE' in $$props) MOVE = $$props.MOVE;
     		if ('NEW_SESSION' in $$props) NEW_SESSION = $$props.NEW_SESSION;
-    		if ('JOIN' in $$props) JOIN = $$props.JOIN;
+    		if ('JOIN_SESSION' in $$props) JOIN_SESSION = $$props.JOIN_SESSION;
+    		if ('latestBoard' in $$props) $$invalidate(0, latestBoard = $$props.latestBoard);
+    		if ('playersInSession' in $$props) $$invalidate(1, playersInSession = $$props.playersInSession);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [sessionId, getLatestBoard];
+    	return [
+    		latestBoard,
+    		playersInSession,
+    		sessionId,
+    		playerName,
+    		joinerName,
+    		fromX,
+    		fromY,
+    		toX,
+    		toY,
+    		playerSide,
+    		getLatestBoard,
+    		getPlayersInSession,
+    		newSession,
+    		joinSession,
+    		move,
+    		click_handler,
+    		click_handler_1,
+    		click_handler_2,
+    		click_handler_3,
+    		click_handler_4
+    	];
     }
 
     class App extends SvelteComponentDev {
