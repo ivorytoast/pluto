@@ -8,6 +8,8 @@
     import Lobby from "./routes/Lobby.svelte";
     import Stratego from "./routes/Stratego/Stratego.svelte";
     import Session from "./routes/Session.svelte";
+    import {state} from "./stores/stratego-store";
+    import {deserialize} from "./serializing/deserializer";
 
     let sessionId = "B1212710"
     let playerName = "Anthony"
@@ -35,14 +37,21 @@
     let playersInSession = '...'
 
     async function getLatestBoard(sessionId) {
-        console.log("Running latest board")
+        console.log("Running latest board: " + sessionId)
         let urlToQuery = URL + LATEST_BOARD + sessionId;
         latestBoard = await (await fetch(urlToQuery)).text()
+        let values = deserialize(latestBoard)
+        $state.board = values[0]
+        $state.players = values[1]
+        $state.playerToMove = values[2]
     }
 
     async function getPlayersInSession(sessionId) {
         let urlToQuery = URL + PLAYERS_IN_SESSION + sessionId;
         playersInSession = await (await fetch(urlToQuery)).text()
+        console.log("Players in session: " + playersInSession)
+        let values = playersInSession.split(",")
+        $state.users = values
     }
 
     async function newSession(sessionId, playerName) {
@@ -64,6 +73,7 @@
         const response = await fetch(urlToQuery, params)
         const output = await response
         console.log(output)
+        $state.session = sessionId
     }
 
     async function joinSession(sessionId, playerName) {
@@ -85,6 +95,7 @@
         const response = await fetch(urlToQuery, params)
         const output = await response
         console.log(output)
+        $state.session = sessionId
     }
 
     async function move(sessionId, playerSide, fromX, fromY, toX, toY) {
@@ -113,6 +124,9 @@
     }
 </script>
 
+<p>{sessionId}</p>
+<input bind:value={sessionId}>
+
 <button on:click={() => newSession(sessionId, playerName)}>
     New Session
 </button>
@@ -132,9 +146,6 @@
 <button on:click={() => getPlayersInSession(sessionId)}>
     Players
 </button>
-
-<p>Board: {latestBoard}</p>
-<p>Players In Session {playersInSession}</p>
 
 <Router>
     <main>

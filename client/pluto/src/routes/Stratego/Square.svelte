@@ -3,7 +3,7 @@
     export let playerColor = ''
 </script>
 
-<div style="--the-color: {playerColor}">
+<div class="p-1" style="--the-color: {playerColor}">
     <button on:click>
         {value}
     </button>
