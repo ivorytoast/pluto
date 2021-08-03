@@ -1,5 +1,6 @@
 export function deserialize(input) {
     // input = "5~2@F~B~E~5~5~T~5~5~B~F@B~B~E~B~B~E~R~R~R~R@B"
+    console.log("Input array: " + input)
     let boardArray = []
     let playersArray = []
 

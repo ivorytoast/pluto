@@ -5,5 +5,6 @@ export const state = writable({
     players: [['B', 'B'], ['R','R']],
     playerToMove: 'B',
     session: '',
-    users: []
+    users: [],
+    pieceChosen: null
 })

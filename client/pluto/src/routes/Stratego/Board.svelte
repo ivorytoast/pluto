@@ -31,11 +31,11 @@
 <h3>Users In Session: {$state.users}</h3>
 <h3>Board: {$state.board}</h3>
 <div class="status">Next player: {$state.playerToMove}</div>
-<div class="grid grid-rows-{numOfRows} grid-cols-1">
+<div class="place-items-center grid grid-rows-{numOfRows} grid-cols-1">
     {#each $state.board as row, i}
         <div class="grid grid-rows-1 grid-cols-{numOfCols}">
             {#each row as value, j}
-                <Square value={value} playerColor={getPlayerColor(i, j)} on:click={e => handleClick(i, j)}/>
+                <Square value={value} playerColor={getPlayerColor(i, j)} x={i} y={j} on:click={e => handleClick(i, j)}/>
             {/each}
         </div>
     {/each}
