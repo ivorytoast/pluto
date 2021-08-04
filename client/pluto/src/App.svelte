@@ -30,34 +30,39 @@
     // Post
     let UPDATE_BOARD = "/game/update/board"
     let MOVE = "/game/move"
-    let NEW_SESSION = "/game/new/redis"
+    let NEW_SESSION = "/game/v1/new"
     let JOIN_SESSION = "/game/join"
 
     let latestBoard = ''
     let playersInSession = '...'
 
-    async function getLatestBoard(sessionId) {
-        console.log("Running latest board: " + sessionId)
-        let urlToQuery = URL + LATEST_BOARD + sessionId;
+    async function getLatestBoard() {
+        console.log("Running latest board: " + $state.session)
+        let urlToQuery = URL + LATEST_BOARD + $state.session;
         latestBoard = await (await fetch(urlToQuery)).text()
         let values = deserialize(latestBoard)
         $state.board = values[0]
+        $state.players = null
         $state.players = values[1]
         $state.playerToMove = values[2]
     }
 
-    async function getPlayersInSession(sessionId) {
-        let urlToQuery = URL + PLAYERS_IN_SESSION + sessionId;
+    async function getPlayersInSession() {
+        let urlToQuery = URL + PLAYERS_IN_SESSION + $state.session;
         playersInSession = await (await fetch(urlToQuery)).text()
         console.log("Players in session: " + playersInSession)
-        let values = playersInSession.split(",")
-        $state.users = values
+        $state.users = playersInSession.split(",")
     }
 
-    async function newSession(sessionId, playerName) {
+    function refreshSessionDetails() {
+        getLatestBoard($state.session)
+        getPlayersInSession($state.session)
+    }
+
+    async function newSession(playerName) {
+        $state.board = [['a','b','c']]
         let urlToQuery = URL + NEW_SESSION;
         const requestObject = {
-            "sessionId":sessionId,
             "playerName":playerName
         }
         let jsonRequest = JSON.stringify(requestObject)
@@ -71,9 +76,10 @@
             method: "POST"
         }
         const response = await fetch(urlToQuery, params)
-        const output = await response
-        console.log(output)
-        $state.session = sessionId
+        const newSessionId = await response.text()
+        console.log(newSessionId)
+        $state.session = newSessionId
+        refreshSessionDetails()
     }
 
     async function joinSession(sessionId, playerName) {
@@ -96,54 +102,23 @@
         const output = await response
         console.log(output)
         $state.session = sessionId
-    }
-
-    async function move(sessionId, playerSide, fromX, fromY, toX, toY) {
-        let urlToQuery = URL + MOVE;
-        const requestObject = {
-            "sessionId":sessionId,
-            "playerSide":playerSide,
-            "fromX":fromX,
-            "fromY":fromY,
-            "toX":toX,
-            "toY":toY
-        }
-        let jsonRequest = JSON.stringify(requestObject)
-        console.log(jsonRequest)
-        const params = {
-            headers: {
-                'Accept': "application/json, text/plain, */*",
-                'Content-Type': "application/json;charset=utf-8"
-            },
-            body: jsonRequest,
-            method: "POST"
-        }
-        const response = await fetch(urlToQuery, params)
-        const output = await response
-        console.log(output)
+        refreshSessionDetails()
     }
 </script>
 
-<p>{sessionId}</p>
-<input bind:value={sessionId}>
-
-<button on:click={() => newSession(sessionId, playerName)}>
+<button on:click={() => newSession(playerName)}>
     New Session
-</button>
-
+</button> <input bind:value={playerName}>
+<br>
 <button on:click={() => joinSession(sessionId, joinerName)}>
     Join Session
-</button>
-
-<button on:click={() => move(sessionId, playerSide, fromX, fromY, toX, toY)}>
-    Move
-</button>
-
-<button on:click={() => getLatestBoard(sessionId)}>
+</button> <input bind:value={sessionId}> <input bind:value={joinerName}>
+<br>
+<button on:click={() => getLatestBoard()}>
     Latest Board
 </button>
-
-<button on:click={() => getPlayersInSession(sessionId)}>
+<br>
+<button on:click={() => getPlayersInSession()}>
     Players
 </button>
 

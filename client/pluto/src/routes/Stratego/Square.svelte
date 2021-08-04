@@ -1,9 +1,35 @@
 <script>
 
     import {state} from '../../stores/stratego-store'
+    import {deserialize} from "../../serializing/deserializer";
 
     let URL = "http://localhost:8080"
     let MOVE = "/game/move"
+    let LATEST_BOARD = "/game/db/board/" // "/game/db/board/{id}"
+
+    let white = "#ffffff"
+    let yellow = "#f0e40a"
+
+    export let value = ''
+    export let playerColor = ''
+    export let x = -1
+    export let y = -1
+    export let backgroundColor = white
+
+    let latestBoard = ''
+    let playersInSession = '...'
+
+    async function getLatestBoard() {
+        console.log("Running latest board: " + $state.session)
+        let urlToQuery = URL + LATEST_BOARD + $state.session;
+        latestBoard = await (await fetch(urlToQuery)).text()
+        let values = deserialize(latestBoard)
+        console.log("1:" + values[0])
+        console.log("2:" + values[1])
+        $state.board = values[0]
+        $state.players = values[1]
+        $state.playerToMove = values[2]
+    }
 
     class Piece {
         constructor(value, player, x, y) {
@@ -14,10 +40,10 @@
         }
     }
 
-    async function movePiece(sessionId, playerSide, fromX, fromY, toX, toY) {
+    async function movePiece(playerSide, fromX, fromY, toX, toY) {
         let urlToQuery = URL + MOVE;
         const requestObject = {
-            "sessionId":sessionId,
+            "sessionId":$state.session,
             "playerSide":playerSide,
             "fromX":fromX,
             "fromY":fromY,
@@ -35,18 +61,8 @@
             method: "POST"
         }
         const response = await fetch(urlToQuery, params)
-        const output = await response
-        console.log(output)
+        $state.moveText = await response.text()
     }
-
-    let white = "#ffffff"
-    let yellow = "#f0e40a"
-
-    export let value = ''
-    export let playerColor = ''
-    export let x = -1
-    export let y = -1
-    let backgroundColor = white
 
     function move() {
         if ($state.pieceChosen === null) {
@@ -59,7 +75,8 @@
             } else {
                 let playerSide = getPlayerSide($state.pieceChosen.player)
                 console.log(playerSide)
-                movePiece($state.session, playerSide, $state.pieceChosen.x, $state.pieceChosen.y, x, y)
+                movePiece($state.playerToMove, $state.pieceChosen.x, $state.pieceChosen.y, x, y)
+                    .then(() => getLatestBoard())
             }
         }
     }
@@ -84,9 +101,27 @@
             backgroundColor = white
         }
     }
+
+    export let pieceBorderColor = ''
+
+    function dynamicallyChangePieceBorderColor() {
+        let gray = '#aaaaaa'
+        let red = '#ff3e00';
+        let blue = '#000ff0';
+
+        if (pieceBorderColor === "B") {
+            pieceBorderColor = blue
+        } else if (pieceBorderColor === "R") {
+            pieceBorderColor = red
+        } else {
+            pieceBorderColor = gray
+        }
+    }
+
+    $: pieceBorderColor, dynamicallyChangePieceBorderColor()
 </script>
 
-<div class="p-0.5" style="--border-color: {playerColor}">
+<div class="p-0.5" style="--border-color: {pieceBorderColor}">
     <button on:click={move} style="--background-color: {backgroundColor}">
         {value}
     </button>
@@ -94,7 +129,7 @@
 
 <style>
     button {
-        width: 40px;
+        width: 80px;
         height: 50px;
         border-color: var(--border-color);
         background-color: var(--background-color);

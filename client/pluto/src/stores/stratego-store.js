@@ -1,10 +1,12 @@
 import { writable } from 'svelte/store';
 
 export const state = writable({
-    board: [['F', 'B'], ['9', '10']],
-    players: [['B', 'B'], ['R','R']],
+    data: [], // Make it the combination of board, players, isChosen, etc...
+    board: [['B','F'],['1','2']],
+    players: [['B','B'],['R','R']],
     playerToMove: 'B',
     session: '',
     users: [],
-    pieceChosen: null
+    pieceChosen: null,
+    moveText: ""
 })
