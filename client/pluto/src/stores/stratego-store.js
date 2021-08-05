@@ -8,5 +8,6 @@ export const state = writable({
     pieceChosen: null,
     moveText: "",
     latestBoard: '',
-    playersInSession: '...'
+    playersInSession: '...',
+    socketBoard: 'nada'
 })
