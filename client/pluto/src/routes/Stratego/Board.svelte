@@ -1,33 +1,65 @@
 <script>
     import Square from './Square.svelte';
-    import {state} from '../../stores/stratego-store'
+    import { state } from '../../stores/stratego-store'
+    import { onMount } from 'svelte';
+    import { deserialize } from "../../serializing/deserializer";
+    import { Data } from "../../model/data";
+    import { constants } from "../../stores/constants-store";
 
-    function getPlayerColor(row, col) {
-        let side = $state.players[row][col]
-
-        let gray = '#aaaaaa'
-        let red = '#ff3e00';
-        let blue = '#000ff0';
-
-        if (side === 'B') {
-            return blue;
-        } else if (side === 'R') {
-            return red;
-        } else {
-            return gray;
+    async function getLatestBoard() {
+        let data = []
+        console.log("ID: " + $state.session)
+        let urlToQuery = $constants.URL + $constants.LATEST_BOARD + $state.session;
+        $state.latestBoard = await (await fetch(urlToQuery)).text()
+        let values = deserialize($state.latestBoard)
+        let board = values[1]
+        let players = values[2]
+        for (let i = 0; i < board.length; i++) {
+            let tempRow = []
+            for (let j = 0; j < board[i].length; j++) {
+                tempRow.push(new Data(board[i][j], players[i][j], false))
+            }
+            data.push(tempRow)
         }
+        $state.playerToMove = values[3]
+        $state.data = data
+        console.log(data)
     }
 
-    let pink = "#ffccff"
+    async function getPlayersInSession() {
+        let urlToQuery = $constants.URL + $constants.PLAYERS_IN_SESSION + $state.session;
+        $state.playersInSession = await (await fetch(urlToQuery)).text()
+        console.log("Players in session: " + $state.playersInSession)
+        $state.users = $state.playersInSession.split(",")
+    }
+
+    function refreshSessionDetails() {
+        getLatestBoard()
+        getPlayersInSession()
+    }
+
+    onMount(async () => {
+        refreshSessionDetails()
+    });
 </script>
 
-<h3>Session ID: {$state.session}</h3>
-<h3>Users In Session: {$state.users}</h3>
-<h3>Board Rows: {$state.board}</h3>
-<h3>Player Rows: {$state.players}</h3>
-<h3>Piece Chosen: {$state.pieceChosen}</h3>
-<div class="status">Next player: {$state.playerToMove}</div>
-<div class="status">Next Nah: {$state.data.length}</div>
+<div class="flex place-content-center mt-10 mb-10 text-3xl">
+    {$state.session}
+</div>
+
+<div class="flex place-content-center mb-10">
+    {#if $state.playerToMove === "B"}
+        <div class="flex-inline border-4 border-green-500 h-10 w-10 rounded-full bg-blue-500"></div>
+        <div class="flex-inline bg-opacity-50 ml-5 h-10 w-10 rounded-full bg-red-400"></div>
+    {:else if $state.playerToMove === "R"}
+        <div class="flex-inline bg-opacity-50 h-10 w-10 rounded-full bg-blue-500"></div>
+        <div class="flex-inline border-4 border-green-500 ml-5 h-10 w-10 rounded-full bg-red-400"></div>
+    {:else}
+        <div class="flex-inline bg-opacity-50 h-10 w-10 rounded-full bg-blue-500"></div>
+        <div class="flex-inline bg-opacity-50 ml-5 h-10 w-10 rounded-full bg-red-400"></div>
+    {/if}
+</div>
+
 <div class="place-items-center grid grid-rows-{$state.data.length} grid-cols-1">
     {#each $state.data as row, i}
         <div class="grid grid-rows-1 grid-cols-{row.length}">

@@ -83,7 +83,7 @@
                     <div class="mt-4">
                         <div class="flex justify-center items-center">
                             <p class="mr-2">No Account?</p>
-                            <Link to="account" href="create.html"
+                            <Link to="/stratego"
                                class=" text-blue-500 transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
                                 Create One
                             </Link>
