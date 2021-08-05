@@ -33,7 +33,7 @@ export function deserialize(input) {
     console.log("new players: " + playersArray.toString())
     console.log("current player: " + currentPlayer.toString())
 
-    return [boardArray, playersArray, currentPlayer]
+    return [dimensions, boardArray, playersArray, currentPlayer]
 }
 
 function doubleToSingle(x, y, cols) {

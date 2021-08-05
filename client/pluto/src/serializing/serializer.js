@@ -1,5 +1,5 @@
 
-input = "5~2@F~B~E~5~5~T~5~5~B~F@B~B~E~B~B~E~R~R~R~R@B"
+// input = "5~2@F~B~E~5~5~T~5~5~B~F@B~B~E~B~B~E~R~R~R~R@B"
 
 export function serialize(boardInput, playerInput, currentPlayer) {
     let rows = boardInput.length

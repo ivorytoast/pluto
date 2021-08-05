@@ -10,6 +10,7 @@
     import Session from "./routes/Session.svelte";
     import {state} from "./stores/stratego-store";
     import {deserialize} from "./serializing/deserializer";
+    import {Data} from "./model/data";
 
     let sessionId = "B1212710"
     let playerName = "Anthony"
@@ -20,8 +21,8 @@
     let toY = 0
     let playerSide = "B"
 
-    // let URL = "https://proxy.titan-backend-nyc.com"
-    let URL = "http://localhost:8080"
+    let URL = "https://proxy.titan-backend-nyc.com"
+    // let URL = "http://localhost:8080"
 
     // Get
     let LATEST_BOARD = "/game/db/board/" // "/game/db/board/{id}"
@@ -37,14 +38,21 @@
     let playersInSession = '...'
 
     async function getLatestBoard() {
-        console.log("Running latest board: " + $state.session)
+        let data = []
         let urlToQuery = URL + LATEST_BOARD + $state.session;
         latestBoard = await (await fetch(urlToQuery)).text()
         let values = deserialize(latestBoard)
-        $state.board = values[0]
-        $state.players = null
-        $state.players = values[1]
-        $state.playerToMove = values[2]
+        let board = values[1]
+        let players = values[2]
+        for (let i = 0; i < board.length; i++) {
+            let tempRow = []
+            for (let j = 0; j < board[i].length; j++) {
+                tempRow.push(new Data(board[i][j], players[i][j], false))
+            }
+            data.push(tempRow)
+        }
+        $state.data = data
+        console.log(data)
     }
 
     async function getPlayersInSession() {
@@ -105,6 +113,8 @@
         refreshSessionDetails()
     }
 </script>
+
+<p>Data: [{$state.data.toString()}]</p>
 
 <button on:click={() => newSession(playerName)}>
     New Session

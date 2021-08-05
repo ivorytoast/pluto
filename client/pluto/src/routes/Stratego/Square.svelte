@@ -2,8 +2,10 @@
 
     import {state} from '../../stores/stratego-store'
     import {deserialize} from "../../serializing/deserializer";
+    import {Data} from "../../model/data";
 
-    let URL = "http://localhost:8080"
+    let URL = "https://proxy.titan-backend-nyc.com"
+    // let URL = "http://localhost:8080"
     let MOVE = "/game/move"
     let LATEST_BOARD = "/game/db/board/" // "/game/db/board/{id}"
 
@@ -19,16 +21,32 @@
     let latestBoard = ''
     let playersInSession = '...'
 
+    function toggleChosenBackground() {
+        $state.data[x][y].selected = !$state.data[x][y].selected;
+    }
+
+    function takeOffBackground(oldX, oldY) {
+        $state.data[oldX][oldY].selected = !$state.data[oldX][oldY].selected;
+    }
+
     async function getLatestBoard() {
-        console.log("Running latest board: " + $state.session)
+        let data = []
         let urlToQuery = URL + LATEST_BOARD + $state.session;
         latestBoard = await (await fetch(urlToQuery)).text()
         let values = deserialize(latestBoard)
-        console.log("1:" + values[0])
-        console.log("2:" + values[1])
-        $state.board = values[0]
-        $state.players = values[1]
-        $state.playerToMove = values[2]
+        let board = values[1]
+        let players = values[2]
+        for (let i = 0; i < board.length; i++) {
+            let tempRow = []
+            for (let j = 0; j < board[i].length; j++) {
+                tempRow.push(new Data(board[i][j], players[i][j], false))
+            }
+            data.push(tempRow)
+        }
+        $state.playerToMove = values[3]
+        $state.data = data
+        console.log(data)
+        $state.pieceChosen = null
     }
 
     class Piece {
@@ -61,6 +79,8 @@
             method: "POST"
         }
         const response = await fetch(urlToQuery, params)
+        takeOffBackground(fromX, fromY)
+        takeOffBackground(toX, toY)
         $state.moveText = await response.text()
     }
 
@@ -76,7 +96,7 @@
                 let playerSide = getPlayerSide($state.pieceChosen.player)
                 console.log(playerSide)
                 movePiece($state.playerToMove, $state.pieceChosen.x, $state.pieceChosen.y, x, y)
-                    .then(() => getLatestBoard())
+                    .then(() => getLatestBoard($state.pieceChosen.x, $state.pieceChosen.y))
             }
         }
     }
@@ -91,14 +111,6 @@
             return "B";
         } else {
             return "E";
-        }
-    }
-
-    function toggleChosenBackground() {
-        if (backgroundColor === "#ffffff") {
-            backgroundColor = yellow
-        } else {
-            backgroundColor = white
         }
     }
 
@@ -119,6 +131,14 @@
     }
 
     $: pieceBorderColor, dynamicallyChangePieceBorderColor()
+
+    $: if ($state.data[x][y].selected) {
+        console.log("It IS SELECTED")
+        backgroundColor = yellow
+    } else {
+        console.log("It is NOT SELECTED")
+        backgroundColor = white
+    }
 </script>
 
 <div class="p-0.5" style="--border-color: {pieceBorderColor}">

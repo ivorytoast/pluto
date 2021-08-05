@@ -27,11 +27,12 @@
 <h3>Player Rows: {$state.players}</h3>
 <h3>Piece Chosen: {$state.pieceChosen}</h3>
 <div class="status">Next player: {$state.playerToMove}</div>
-<div class="place-items-center grid grid-rows-{$state.board.length} grid-cols-1">
-    {#each $state.board as row, i}
-        <div class="grid grid-rows-1 grid-cols-{$state.board[0].length}">
-            {#each row as value, j}
-                <Square value={value} pieceBorderColor="{$state.players[i][j]}" backgroundColor={"#ffffff"} x={i} y={j}/>
+<div class="status">Next Nah: {$state.data.length}</div>
+<div class="place-items-center grid grid-rows-{$state.data.length} grid-cols-1">
+    {#each $state.data as row, i}
+        <div class="grid grid-rows-1 grid-cols-{row.length}">
+            {#each row as piece, j}
+                <Square value={piece.pieceValue} pieceBorderColor="{piece.ownerValue}" x={i} y={j}/>
             {/each}
         </div>
     {/each}
