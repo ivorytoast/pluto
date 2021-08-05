@@ -51,6 +51,7 @@
             }
             data.push(tempRow)
         }
+        $state.playerToMove = values[3]
         $state.data = data
         console.log(data)
     }
