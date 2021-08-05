@@ -70,5 +70,12 @@
     {/each}
 </div>
 
+<div class="flex place-content-center mt-10 mb-10 text-md">
+    <button on:click={refreshSessionDetails}
+            class="bg-blue-500 w-100 p-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
+        Refresh Board
+    </button>
+</div>
+
 <style>
 </style>

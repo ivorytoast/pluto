@@ -3,15 +3,12 @@
     import {state} from "../../stores/stratego-store";
     import {user} from "../../stores/user-store";
     import {Link, navigate} from "svelte-navigator";
+    import {constants} from "../../stores/constants-store";
 
-    let URL = "https://proxy.titan-backend-nyc.com"
-    // let URL = "http://localhost:8080"
-    let NEW_SESSION = "/game/v1/new"
-    let loading = false
     $: loginButtonLabel = "New Game"
 
     async function newSession() {
-        let urlToQuery = URL + NEW_SESSION;
+        let urlToQuery = $constants.URL + $constants.NEW_SESSION;
         const requestObject = {
             "playerName": $user.username
         }
@@ -41,8 +38,8 @@
 {$state.session}
 
 <div class="font-sans">
-    <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
-        <div class="relative sm:max-w-sm w-full">
+    <div class="relative min-h-screen flex flex-col justify-center items-center">
+        <div class="relative max-w-sm w-full">
             <div class="card bg-blue-200 shadow-lg  w-full h-full rounded-3xl absolute transform -rotate-6"></div>
             <div class="card bg-red-200 shadow-lg  w-full h-full rounded-3xl absolute transform rotate-6"></div>
             <div class="relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md">

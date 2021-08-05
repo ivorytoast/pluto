@@ -3,15 +3,12 @@
     import {state} from "../../stores/stratego-store";
     import {user} from "../../stores/user-store";
     import {Link, navigate} from "svelte-navigator";
+    import {constants} from "../../stores/constants-store";
 
-    let URL = "https://proxy.titan-backend-nyc.com"
-    // let URL = "http://localhost:8080"
-    let JOIN_SESSION = "/game/join"
-    let loading = false
     $: loginButtonLabel = "Join " + $state.session
 
     async function joinSession() {
-        let urlToQuery = URL + JOIN_SESSION;
+        let urlToQuery = $constants.URL + $constants.JOIN_SESSION;
         const requestObject = {
             "sessionId": $state.session,
             "playerName": $user.username
@@ -39,8 +36,8 @@
 </script>
 
 <div class="font-sans">
-    <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
-        <div class="relative sm:max-w-sm w-full">
+    <div class="relative min-h-screen flex flex-col justify-center items-center">
+        <div class="relative max-w-sm w-full">
             <div class="card bg-blue-200 shadow-lg  w-full h-full rounded-3xl absolute transform -rotate-6"></div>
             <div class="card bg-red-200 shadow-lg  w-full h-full rounded-3xl absolute transform rotate-6"></div>
             <div class="relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md">
@@ -54,7 +51,7 @@
                 </div>
 
                 <div class="mt-7">
-                    <button disabled={loading} on:click={joinExistingSession}
+                    <button on:click={joinExistingSession}
                             class="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
                         {loginButtonLabel}
                     </button>

@@ -4122,7 +4122,12 @@ var app = (function () {
     	let t2;
     	let div2;
     	let div2_class_value;
+    	let t3;
+    	let div3;
+    	let button;
     	let current;
+    	let mounted;
+    	let dispose;
 
     	function select_block_type(ctx, dirty) {
     		if (/*$state*/ ctx[0].playerToMove === "B") return create_if_block;
@@ -4158,12 +4163,20 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
+    			t3 = space();
+    			div3 = element("div");
+    			button = element("button");
+    			button.textContent = "Refresh Board";
     			attr_dev(div0, "class", "flex place-content-center mt-10 mb-10 text-3xl");
     			add_location(div0, file$4, 45, 0, 1573);
     			attr_dev(div1, "class", "flex place-content-center mb-10");
     			add_location(div1, file$4, 49, 0, 1663);
     			attr_dev(div2, "class", div2_class_value = "place-items-center grid grid-rows-" + /*$state*/ ctx[0].data.length + " grid-cols-1");
     			add_location(div2, file$4, 62, 0, 2390);
+    			attr_dev(button, "class", "bg-blue-500 w-100 p-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105");
+    			add_location(button, file$4, 73, 4, 2823);
+    			attr_dev(div3, "class", "flex place-content-center mt-10 mb-10 text-md");
+    			add_location(div3, file$4, 72, 0, 2759);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4181,7 +4194,15 @@ var app = (function () {
     				each_blocks[i].m(div2, null);
     			}
 
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, button);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*refreshSessionDetails*/ ctx[1], false, false, false);
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
     			if ((!current || dirty & /*$state*/ 1) && t0_value !== (t0_value = /*$state*/ ctx[0].session + "")) set_data_dev(t0, t0_value);
@@ -4254,6 +4275,10 @@ var app = (function () {
     			if (detaching) detach_dev(t2);
     			if (detaching) detach_dev(div2);
     			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(div3);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -4274,7 +4299,7 @@ var app = (function () {
     	validate_store(state, 'state');
     	component_subscribe($$self, state, $$value => $$invalidate(0, $state = $$value));
     	validate_store(constants, 'constants');
-    	component_subscribe($$self, constants, $$value => $$invalidate(1, $constants = $$value));
+    	component_subscribe($$self, constants, $$value => $$invalidate(2, $constants = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Board', slots, []);
 
@@ -4338,7 +4363,7 @@ var app = (function () {
     		$constants
     	});
 
-    	return [$state];
+    	return [$state, refreshSessionDetails];
     }
 
     class Board extends SvelteComponentDev {
@@ -4368,7 +4393,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(board.$$.fragment);
-    			add_location(div, file$3, 4, 0, 98);
+    			add_location(div, file$3, 4, 0, 60);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4443,7 +4468,7 @@ var app = (function () {
     const { console: console_1$1 } = globals;
     const file$2 = "src/routes/Stratego/NewSessionLogin.svelte";
 
-    // (61:20) <Link to="/game/join"                           class=" text-blue-500 transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
+    // (58:20) <Link to="/game/join"                           class=" text-blue-500 transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
     function create_default_slot$2(ctx) {
     	let button;
 
@@ -4452,7 +4477,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Join A Game";
     			attr_dev(button, "class", "bg-red-400 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105");
-    			add_location(button, file$2, 62, 24, 2489);
+    			add_location(button, file$2, 59, 24, 2398);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -4466,7 +4491,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$2.name,
     		type: "slot",
-    		source: "(61:20) <Link to=\\\"/game/join\\\"                           class=\\\" text-blue-500 transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105\\\">",
+    		source: "(58:20) <Link to=\\\"/game/join\\\"                           class=\\\" text-blue-500 transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105\\\">",
     		ctx
     	});
 
@@ -4529,25 +4554,25 @@ var app = (function () {
     			div3 = element("div");
     			create_component(link.$$.fragment);
     			attr_dev(div0, "class", "card bg-blue-200 shadow-lg  w-full h-full rounded-3xl absolute transform -rotate-6");
-    			add_location(div0, file$2, 45, 12, 1407);
+    			add_location(div0, file$2, 42, 12, 1316);
     			attr_dev(div1, "class", "card bg-red-200 shadow-lg  w-full h-full rounded-3xl absolute transform rotate-6");
-    			add_location(div1, file$2, 46, 12, 1522);
+    			add_location(div1, file$2, 43, 12, 1431);
     			attr_dev(p, "class", "block pt-7 text-xl text-gray-700 text-center font-semibold");
-    			add_location(p, file$2, 48, 16, 1725);
+    			add_location(p, file$2, 45, 16, 1634);
     			attr_dev(button, "class", "bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105");
-    			add_location(button, file$2, 53, 20, 1907);
+    			add_location(button, file$2, 50, 20, 1816);
     			attr_dev(div2, "class", "mt-7 mb-4");
-    			add_location(div2, file$2, 52, 16, 1863);
+    			add_location(div2, file$2, 49, 16, 1772);
     			attr_dev(div3, "class", "mt-7 mb-4");
-    			add_location(div3, file$2, 59, 16, 2268);
+    			add_location(div3, file$2, 56, 16, 2177);
     			attr_dev(div4, "class", "relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md");
-    			add_location(div4, file$2, 47, 12, 1635);
-    			attr_dev(div5, "class", "relative sm:max-w-sm w-full");
-    			add_location(div5, file$2, 44, 8, 1353);
-    			attr_dev(div6, "class", "relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ");
-    			add_location(div6, file$2, 43, 4, 1251);
+    			add_location(div4, file$2, 44, 12, 1544);
+    			attr_dev(div5, "class", "relative max-w-sm w-full");
+    			add_location(div5, file$2, 41, 8, 1265);
+    			attr_dev(div6, "class", "relative min-h-screen flex flex-col justify-center items-center");
+    			add_location(div6, file$2, 40, 4, 1179);
     			attr_dev(div7, "class", "font-sans");
-    			add_location(div7, file$2, 42, 0, 1223);
+    			add_location(div7, file$2, 39, 0, 1151);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4583,7 +4608,7 @@ var app = (function () {
     			if (!current || dirty & /*loginButtonLabel*/ 1) set_data_dev(t6, /*loginButtonLabel*/ ctx[0]);
     			const link_changes = {};
 
-    			if (dirty & /*$$scope*/ 256) {
+    			if (dirty & /*$$scope*/ 64) {
     				link_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4623,21 +4648,18 @@ var app = (function () {
     	let loginButtonLabel;
     	let $state;
     	let $user;
+    	let $constants;
     	validate_store(state, 'state');
     	component_subscribe($$self, state, $$value => $$invalidate(1, $state = $$value));
     	validate_store(user, 'user');
     	component_subscribe($$self, user, $$value => $$invalidate(3, $user = $$value));
+    	validate_store(constants, 'constants');
+    	component_subscribe($$self, constants, $$value => $$invalidate(4, $constants = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('NewSessionLogin', slots, []);
-    	let URL = "https://proxy.titan-backend-nyc.com";
-
-    	// let URL = "http://localhost:8080"
-    	let NEW_SESSION = "/game/v1/new";
-
-    	let loading = false;
 
     	async function newSession() {
-    		let urlToQuery = URL + NEW_SESSION;
+    		let urlToQuery = $constants.URL + $constants.NEW_SESSION;
     		const requestObject = { "playerName": $user.username };
     		let jsonRequest = JSON.stringify(requestObject);
     		console.log(jsonRequest);
@@ -4674,20 +4696,16 @@ var app = (function () {
     		user,
     		Link: Link$1,
     		navigate,
-    		URL,
-    		NEW_SESSION,
-    		loading,
+    		constants,
     		newSession,
     		createNewSession,
     		loginButtonLabel,
     		$state,
-    		$user
+    		$user,
+    		$constants
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('URL' in $$props) URL = $$props.URL;
-    		if ('NEW_SESSION' in $$props) NEW_SESSION = $$props.NEW_SESSION;
-    		if ('loading' in $$props) loading = $$props.loading;
     		if ('loginButtonLabel' in $$props) $$invalidate(0, loginButtonLabel = $$props.loginButtonLabel);
     	};
 
@@ -4718,7 +4736,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$1 = "src/routes/Stratego/JoinSessionLogin.svelte";
 
-    // (64:20) <Link to="/game/new"                           class=" text-blue-500 text-3xl transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
+    // (61:20) <Link to="/game/new"                           class=" text-blue-500 text-3xl transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
     function create_default_slot$1(ctx) {
     	let t;
 
@@ -4738,7 +4756,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(64:20) <Link to=\\\"/game/new\\\"                           class=\\\" text-blue-500 text-3xl transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105\\\">",
+    		source: "(61:20) <Link to=\\\"/game/new\\\"                           class=\\\" text-blue-500 text-3xl transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105\\\">",
     		ctx
     	});
 
@@ -4802,31 +4820,30 @@ var app = (function () {
     			div4 = element("div");
     			create_component(link.$$.fragment);
     			attr_dev(div0, "class", "card bg-blue-200 shadow-lg  w-full h-full rounded-3xl absolute transform -rotate-6");
-    			add_location(div0, file$1, 43, 12, 1392);
+    			add_location(div0, file$1, 40, 12, 1302);
     			attr_dev(div1, "class", "card bg-red-200 shadow-lg  w-full h-full rounded-3xl absolute transform rotate-6");
-    			add_location(div1, file$1, 44, 12, 1507);
+    			add_location(div1, file$1, 41, 12, 1417);
     			attr_dev(p, "class", "block pt-7 text-xl text-gray-700 text-center font-semibold");
-    			add_location(p, file$1, 46, 16, 1710);
+    			add_location(p, file$1, 43, 16, 1620);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", "Session ID to Join");
     			attr_dev(input, "class", "mt-7 pl-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0");
-    			add_location(input, file$1, 51, 20, 1874);
-    			add_location(div2, file$1, 50, 16, 1848);
-    			button.disabled = /*loading*/ ctx[2];
+    			add_location(input, file$1, 48, 20, 1784);
+    			add_location(div2, file$1, 47, 16, 1758);
     			attr_dev(button, "class", "bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105");
-    			add_location(button, file$1, 56, 20, 2191);
+    			add_location(button, file$1, 53, 20, 2101);
     			attr_dev(div3, "class", "mt-7");
-    			add_location(div3, file$1, 55, 16, 2152);
+    			add_location(div3, file$1, 52, 16, 2062);
     			attr_dev(div4, "class", "mt-7 mb-2 items-center text-center");
-    			add_location(div4, file$1, 62, 16, 2574);
+    			add_location(div4, file$1, 59, 16, 2465);
     			attr_dev(div5, "class", "relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md");
-    			add_location(div5, file$1, 45, 12, 1620);
-    			attr_dev(div6, "class", "relative sm:max-w-sm w-full");
-    			add_location(div6, file$1, 42, 8, 1338);
-    			attr_dev(div7, "class", "relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ");
-    			add_location(div7, file$1, 41, 4, 1236);
+    			add_location(div5, file$1, 42, 12, 1530);
+    			attr_dev(div6, "class", "relative max-w-sm w-full");
+    			add_location(div6, file$1, 39, 8, 1251);
+    			attr_dev(div7, "class", "relative min-h-screen flex flex-col justify-center items-center");
+    			add_location(div7, file$1, 38, 4, 1165);
     			attr_dev(div8, "class", "font-sans");
-    			add_location(div8, file$1, 40, 0, 1208);
+    			add_location(div8, file$1, 37, 0, 1137);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4856,8 +4873,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[4]),
-    					listen_dev(button, "click", /*joinExistingSession*/ ctx[3], false, false, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[3]),
+    					listen_dev(button, "click", /*joinExistingSession*/ ctx[2], false, false, false)
     				];
 
     				mounted = true;
@@ -4871,7 +4888,7 @@ var app = (function () {
     			if (!current || dirty & /*loginButtonLabel*/ 2) set_data_dev(t5, /*loginButtonLabel*/ ctx[1]);
     			const link_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 128) {
     				link_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4909,21 +4926,18 @@ var app = (function () {
     	let loginButtonLabel;
     	let $user;
     	let $state;
+    	let $constants;
     	validate_store(user, 'user');
-    	component_subscribe($$self, user, $$value => $$invalidate(5, $user = $$value));
+    	component_subscribe($$self, user, $$value => $$invalidate(4, $user = $$value));
     	validate_store(state, 'state');
     	component_subscribe($$self, state, $$value => $$invalidate(0, $state = $$value));
+    	validate_store(constants, 'constants');
+    	component_subscribe($$self, constants, $$value => $$invalidate(5, $constants = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('JoinSessionLogin', slots, []);
-    	let URL = "https://proxy.titan-backend-nyc.com";
-
-    	// let URL = "http://localhost:8080"
-    	let JOIN_SESSION = "/game/join";
-
-    	let loading = false;
 
     	async function joinSession() {
-    		let urlToQuery = URL + JOIN_SESSION;
+    		let urlToQuery = $constants.URL + $constants.JOIN_SESSION;
 
     		const requestObject = {
     			"sessionId": $state.session,
@@ -4969,20 +4983,16 @@ var app = (function () {
     		user,
     		Link: Link$1,
     		navigate,
-    		URL,
-    		JOIN_SESSION,
-    		loading,
+    		constants,
     		joinSession,
     		joinExistingSession,
     		loginButtonLabel,
     		$user,
-    		$state
+    		$state,
+    		$constants
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('URL' in $$props) URL = $$props.URL;
-    		if ('JOIN_SESSION' in $$props) JOIN_SESSION = $$props.JOIN_SESSION;
-    		if ('loading' in $$props) $$invalidate(2, loading = $$props.loading);
     		if ('loginButtonLabel' in $$props) $$invalidate(1, loginButtonLabel = $$props.loginButtonLabel);
     	};
 
@@ -4996,7 +5006,7 @@ var app = (function () {
     		}
     	};
 
-    	return [$state, loginButtonLabel, loading, joinExistingSession, input_input_handler];
+    	return [$state, loginButtonLabel, joinExistingSession, input_input_handler];
     }
 
     class JoinSessionLogin extends SvelteComponentDev {
