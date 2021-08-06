@@ -5,7 +5,7 @@
     import { deserialize } from "../../serializing/deserializer";
     import { Data } from "../../model/data";
     import { constants } from "../../stores/constants-store";
-    import { io } from "socket.io-client";
+    // import { io } from "socket.io-client";
 
     async function getLatestBoard() {
         let data = []
@@ -43,16 +43,23 @@
         refreshSessionDetails()
     });
 
-    const socket = io('ws://proxy.titan-backend-nyc.com:8070');
-
-    socket.on('connection', sock => {
-        console.log("joining... " + sock)
-    });
-
-    socket.on($state.session, function(msg) {
-        console.log("Received from chat: " + msg);
+    function refreshBoard() {
+        console.log("Refreshing board details...")
         refreshSessionDetails()
-    });
+    }
+
+    setInterval(refreshBoard, 2000);
+
+    // const socket = io('ws://localhost:8070');
+    //
+    // socket.on('connection', sock => {
+    //     console.log("joining... " + sock)
+    // });
+    //
+    // socket.on($state.session, function(msg) {
+    //     console.log("Received from chat: " + msg);
+    //     refreshSessionDetails()
+    // });
 </script>
 
 <div class="flex place-content-center mt-10 mb-10 text-3xl">

@@ -3449,7 +3449,7 @@ var app = (function () {
     }
 
     const constants = writable({
-        URL: "http://localhost:8080", //"https://proxy.titan-backend-nyc.com"
+        URL: "http://localhost:8080", // https://proxy.titan-backend-nyc.com"
         LATEST_BOARD: "/game/db/board/", // "/game/db/board/{id}"
         PLAYERS_IN_SESSION: "/game/sessions/players/", // "/game/sessions/players/{id}"
         UPDATE_BOARD: "/game/update/board",
@@ -8645,7 +8645,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (69:4) {:else}
+    // (76:4) {:else}
     function create_else_block(ctx) {
     	let div0;
     	let t;
@@ -8657,9 +8657,9 @@ var app = (function () {
     			t = space();
     			div1 = element("div");
     			attr_dev(div0, "class", "flex-inline bg-opacity-50 h-10 w-10 rounded-full bg-blue-500");
-    			add_location(div0, file$4, 69, 8, 2515);
+    			add_location(div0, file$4, 76, 8, 2709);
     			attr_dev(div1, "class", "flex-inline bg-opacity-50 ml-5 h-10 w-10 rounded-full bg-red-400");
-    			add_location(div1, file$4, 70, 8, 2604);
+    			add_location(div1, file$4, 77, 8, 2798);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -8677,14 +8677,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(69:4) {:else}",
+    		source: "(76:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (66:42) 
+    // (73:42) 
     function create_if_block_1(ctx) {
     	let div0;
     	let t;
@@ -8696,9 +8696,9 @@ var app = (function () {
     			t = space();
     			div1 = element("div");
     			attr_dev(div0, "class", "flex-inline bg-opacity-50 h-10 w-10 rounded-full bg-blue-500");
-    			add_location(div0, file$4, 66, 8, 2309);
+    			add_location(div0, file$4, 73, 8, 2503);
     			attr_dev(div1, "class", "flex-inline border-4 border-green-500 ml-5 h-10 w-10 rounded-full bg-red-400");
-    			add_location(div1, file$4, 67, 8, 2398);
+    			add_location(div1, file$4, 74, 8, 2592);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -8716,14 +8716,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(66:42) ",
+    		source: "(73:42) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (63:4) {#if $state.playerToMove === "B"}
+    // (70:4) {#if $state.playerToMove === "B"}
     function create_if_block(ctx) {
     	let div0;
     	let t;
@@ -8735,9 +8735,9 @@ var app = (function () {
     			t = space();
     			div1 = element("div");
     			attr_dev(div0, "class", "flex-inline border-4 border-green-500 h-10 w-10 rounded-full bg-blue-500");
-    			add_location(div0, file$4, 63, 8, 2072);
+    			add_location(div0, file$4, 70, 8, 2266);
     			attr_dev(div1, "class", "flex-inline bg-opacity-50 ml-5 h-10 w-10 rounded-full bg-red-400");
-    			add_location(div1, file$4, 64, 8, 2173);
+    			add_location(div1, file$4, 71, 8, 2367);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -8755,14 +8755,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(63:4) {#if $state.playerToMove === \\\"B\\\"}",
+    		source: "(70:4) {#if $state.playerToMove === \\\"B\\\"}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (78:12) {#each row as piece, j}
+    // (85:12) {#each row as piece, j}
     function create_each_block_1(ctx) {
     	let square;
     	let current;
@@ -8809,14 +8809,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(78:12) {#each row as piece, j}",
+    		source: "(85:12) {#each row as piece, j}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (76:4) {#each $state.data as row, i}
+    // (83:4) {#each $state.data as row, i}
     function create_each_block(ctx) {
     	let div;
     	let t;
@@ -8844,7 +8844,7 @@ var app = (function () {
 
     			t = space();
     			attr_dev(div, "class", div_class_value = "grid grid-rows-1 grid-cols-" + /*row*/ ctx[6].length);
-    			add_location(div, file$4, 76, 8, 2830);
+    			add_location(div, file$4, 83, 8, 3024);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8917,7 +8917,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(76:4) {#each $state.data as row, i}",
+    		source: "(83:4) {#each $state.data as row, i}",
     		ctx
     	});
 
@@ -8979,15 +8979,15 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Refresh Board";
     			attr_dev(div0, "class", "flex place-content-center mt-10 mb-10 text-3xl");
-    			add_location(div0, file$4, 57, 0, 1890);
+    			add_location(div0, file$4, 64, 0, 2084);
     			attr_dev(div1, "class", "flex place-content-center mb-10");
-    			add_location(div1, file$4, 61, 0, 1980);
+    			add_location(div1, file$4, 68, 0, 2174);
     			attr_dev(div2, "class", div2_class_value = "place-items-center grid grid-rows-" + /*$state*/ ctx[0].data.length + " grid-cols-1");
-    			add_location(div2, file$4, 74, 0, 2707);
+    			add_location(div2, file$4, 81, 0, 2901);
     			attr_dev(button, "class", "bg-blue-500 w-100 p-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105");
-    			add_location(button, file$4, 85, 4, 3140);
+    			add_location(button, file$4, 92, 4, 3334);
     			attr_dev(div3, "class", "flex place-content-center mt-10 mb-10 text-md");
-    			add_location(div3, file$4, 84, 0, 3076);
+    			add_location(div3, file$4, 91, 0, 3270);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9154,17 +9154,12 @@ var app = (function () {
     		refreshSessionDetails();
     	});
 
-    	const socket = io('ws://localhost:8070');
-
-    	socket.on('connection', sock => {
-    		console.log("joining... " + sock);
-    	});
-
-    	socket.on($state.session, function (msg) {
-    		console.log("Received from chat: " + msg);
+    	function refreshBoard() {
+    		console.log("Refreshing board details...");
     		refreshSessionDetails();
-    	});
+    	}
 
+    	setInterval(refreshBoard, 2000);
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -9182,7 +9177,7 @@ var app = (function () {
     		getLatestBoard,
     		getPlayersInSession,
     		refreshSessionDetails,
-    		socket,
+    		refreshBoard,
     		$state,
     		$constants
     	});
