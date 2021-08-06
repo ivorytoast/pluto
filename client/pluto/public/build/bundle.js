@@ -3473,11 +3473,11 @@ var app = (function () {
     			button = element("button");
     			t = text(/*value*/ ctx[2]);
     			set_style(button, "--background-color", /*backgroundColor*/ ctx[1]);
-    			attr_dev(button, "class", "svelte-zq0373");
-    			add_location(button, file$5, 147, 4, 4605);
+    			attr_dev(button, "class", "svelte-18or6hn");
+    			add_location(button, file$5, 148, 4, 4643);
     			attr_dev(div, "class", "p-0.5");
     			set_style(div, "--border-color", /*pieceBorderColor*/ ctx[0]);
-    			add_location(div, file$5, 146, 0, 4538);
+    			add_location(div, file$5, 147, 0, 4576);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3624,7 +3624,8 @@ var app = (function () {
     		const response = await fetch(urlToQuery, params);
     		takeOffBackground(fromX, fromY);
     		takeOffBackground(toX, toY);
-    		set_store_value(state, $state.moveText = await response.text(), $state);
+    		await response.text();
+    		set_store_value(state, $state.moveText = "Success!", $state);
     	}
 
     	function move() {

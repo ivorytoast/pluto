@@ -76,7 +76,8 @@
         const response = await fetch(urlToQuery, params)
         takeOffBackground(fromX, fromY)
         takeOffBackground(toX, toY)
-        $state.moveText = await response.text()
+        let responseOut = await response.text();
+        $state.moveText = "Success!"
     }
 
     function move() {
@@ -152,7 +153,7 @@
 
 <style>
     button {
-        width: 80px;
+        width: 40px;
         height: 50px;
         border-color: var(--border-color);
         background-color: var(--background-color);
