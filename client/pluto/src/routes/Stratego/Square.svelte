@@ -3,11 +3,7 @@
     import {state} from '../../stores/stratego-store'
     import {deserialize} from "../../serializing/deserializer";
     import {Data} from "../../model/data";
-
-    let URL = "https://proxy.titan-backend-nyc.com"
-    // let URL = "http://localhost:8080"
-    let MOVE = "/game/move"
-    let LATEST_BOARD = "/game/db/board/" // "/game/db/board/{id}"
+    import {constants} from "../../stores/constants-store";
 
     let white = "#ffffff"
     let yellow = "#f0e40a"
@@ -31,7 +27,7 @@
 
     async function getLatestBoard() {
         let data = []
-        let urlToQuery = URL + LATEST_BOARD + $state.session;
+        let urlToQuery = $constants.URL + $constants.LATEST_BOARD + $state.session;
         latestBoard = await (await fetch(urlToQuery)).text()
         let values = deserialize(latestBoard)
         let board = values[1]
@@ -59,7 +55,7 @@
     }
 
     async function movePiece(playerSide, fromX, fromY, toX, toY) {
-        let urlToQuery = URL + MOVE;
+        let urlToQuery = $constants.URL + $constants.MOVE;
         const requestObject = {
             "sessionId":$state.session,
             "playerSide":playerSide,

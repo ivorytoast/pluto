@@ -45,26 +45,15 @@
 
     const socket = io('ws://localhost:8070');
 
-    socket.on('message', text => {
-        $state.socketBoard = text
+    socket.on('connection', sock => {
+        console.log("joining... " + sock)
     });
 
-    let text = ''
-    function doThis() {
-        socket.emit('message', text)
-    }
+    socket.on($state.session, function(msg) {
+        console.log("Received from chat: " + msg);
+        refreshSessionDetails()
+    });
 </script>
-
-Latest Board: {$state.socketBoard}
-
-<div class="flex place-content-center mt-10 mb-10 text-3xl">
-    <ul>
-
-    </ul>
-
-    <input bind:value={text} placeholder="message">
-    <button on:click={doThis}>Send</button>
-</div>
 
 <div class="flex place-content-center mt-10 mb-10 text-3xl">
     {$state.session}
