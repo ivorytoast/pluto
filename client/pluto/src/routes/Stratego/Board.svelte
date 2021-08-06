@@ -43,7 +43,7 @@
         refreshSessionDetails()
     });
 
-    const socket = io('ws://localhost:8070');
+    const socket = io('ws://proxy.titan-backend-nyc.com:8070');
 
     socket.on('connection', sock => {
         console.log("joining... " + sock)
