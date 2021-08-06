@@ -1,6 +1,6 @@
 <script>
 
-    import {state} from "../../stores/stratego-store";
+    import {player, state} from "../../stores/stratego-store";
     import {user} from "../../stores/user-store";
     import {Link, navigate} from "svelte-navigator";
     import {constants} from "../../stores/constants-store";
@@ -11,7 +11,7 @@
         let urlToQuery = $constants.URL + $constants.JOIN_SESSION;
         const requestObject = {
             "sessionId": $state.session,
-            "playerName": $user.username
+            "playerName": $player.name
         }
         let jsonRequest = JSON.stringify(requestObject)
         console.log(jsonRequest)
@@ -24,14 +24,27 @@
             method: "POST"
         }
         const response = await fetch(urlToQuery, params)
-        const output = await response
+        const output = await response.text()
+        if (output === "BLUE") {
+            $player.playerSide = "B";
+        } else if (output === "RED") {
+            $player.playerSide = "R";
+        } else if (output === "SPECTATOR") {
+            $player.playerSide = "E";
+        } else {
+            $player.playerSide = "Unknown (Spectator)";
+        }
         console.log(output)
     }
 
     function joinExistingSession() {
-        joinSession().then(() => {
-            navigate("/stratego", {replace: true});
-        })
+        if ($player.name === '') {
+            alert("Must input a name to join a session!")
+        } else {
+            joinSession().then(() => {
+                navigate("/stratego", {replace: true});
+            })
+        }
     }
 </script>
 
@@ -44,6 +57,11 @@
                 <p class="block pt-7 text-xl text-gray-700 text-center font-semibold">
                     Pluto 🪐
                 </p>
+
+                <div>
+                    <input bind:value={$player.name} type="text" placeholder="Name"
+                           class="mt-7 pl-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                </div>
 
                 <div>
                     <input bind:value={$state.session} type="text" placeholder="Session ID to Join"

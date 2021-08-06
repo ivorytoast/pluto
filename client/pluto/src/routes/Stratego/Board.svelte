@@ -5,13 +5,17 @@
     import { deserialize } from "../../serializing/deserializer";
     import { Data } from "../../model/data";
     import { constants } from "../../stores/constants-store";
-    // import { io } from "socket.io-client";
+    import { player } from "../../stores/stratego-store";
 
     async function getLatestBoard() {
         let data = []
-        console.log("ID: " + $state.session)
         let urlToQuery = $constants.URL + $constants.LATEST_BOARD + $state.session;
-        $state.latestBoard = await (await fetch(urlToQuery)).text()
+        let fetchedBoard = await (await fetch(urlToQuery)).text()
+        if ($state.latestBoard === fetchedBoard) {
+            console.log("Same board, no need to parse...")
+            return false;
+        }
+        $state.latestBoard = fetchedBoard
         let values = deserialize($state.latestBoard)
         let board = values[1]
         let players = values[2]
@@ -24,19 +28,22 @@
         }
         $state.playerToMove = values[3]
         $state.data = data
-        console.log(data)
+        return true
     }
 
     async function getPlayersInSession() {
         let urlToQuery = $constants.URL + $constants.PLAYERS_IN_SESSION + $state.session;
         $state.playersInSession = await (await fetch(urlToQuery)).text()
-        console.log("Players in session: " + $state.playersInSession)
         $state.users = $state.playersInSession.split(",")
     }
 
     function refreshSessionDetails() {
         getLatestBoard()
-        getPlayersInSession()
+        .then(value => {
+            if (value) {
+                getPlayersInSession()
+            }
+        });
     }
 
     onMount(async () => {
@@ -49,17 +56,6 @@
     }
 
     setInterval(refreshBoard, 2000);
-
-    // const socket = io('ws://localhost:8070');
-    //
-    // socket.on('connection', sock => {
-    //     console.log("joining... " + sock)
-    // });
-    //
-    // socket.on($state.session, function(msg) {
-    //     console.log("Received from chat: " + msg);
-    //     refreshSessionDetails()
-    // });
 </script>
 
 <div class="flex place-content-center mt-10 mb-10 text-3xl">
@@ -90,10 +86,18 @@
 </div>
 
 <div class="flex place-content-center mt-10 mb-10 text-md">
-    <button on:click={refreshSessionDetails}
-            class="bg-blue-500 w-100 p-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
-        Refresh Board
-    </button>
+    You are
+    {#if $player.playerSide === "B"}
+        BLUE
+    {:else if $player.playerSide === "R"}
+        RED
+    {:else}
+        a SPECTATOR
+    {/if}
+</div>
+
+<div class="flex place-content-center mt-10 mb-10 text-md">
+    {$state.moveText}
 </div>
 
 <style>

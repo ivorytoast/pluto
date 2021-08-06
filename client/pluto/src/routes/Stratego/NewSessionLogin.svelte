@@ -1,6 +1,7 @@
 <script>
 
     import {state} from "../../stores/stratego-store";
+    import {player} from "../../stores/stratego-store";
     import {user} from "../../stores/user-store";
     import {Link, navigate} from "svelte-navigator";
     import {constants} from "../../stores/constants-store";
@@ -10,7 +11,7 @@
     async function newSession() {
         let urlToQuery = $constants.URL + $constants.NEW_SESSION;
         const requestObject = {
-            "playerName": $user.username
+            "playerName": $player.name
         }
         let jsonRequest = JSON.stringify(requestObject)
         console.log(jsonRequest)
@@ -25,13 +26,18 @@
         const response = await fetch(urlToQuery, params)
         const newSessionId = await response.text()
         console.log(newSessionId)
+        $player.playerSide = 'B'
         $state.session = newSessionId
     }
 
     function createNewSession() {
-        newSession().then(() => {
-            navigate("/stratego", {replace: true});
-        })
+        if ($player.name === '') {
+            alert("Must input a name to join a session!")
+        } else {
+            newSession().then(() => {
+                navigate("/stratego", {replace: true});
+            })
+        }
     }
 </script>
 
@@ -46,6 +52,11 @@
                 <p class="block pt-7 text-xl text-gray-700 text-center font-semibold">
                     Pluto 🪐
                 </p>
+
+                <div>
+                    <input bind:value={$player.name} type="text" placeholder="Name"
+                           class="mt-7 pl-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                </div>
 
                 <div class="mt-7 mb-4">
                     <button on:click={createNewSession}

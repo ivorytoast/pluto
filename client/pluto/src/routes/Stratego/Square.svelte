@@ -1,6 +1,7 @@
 <script>
 
-    import {state} from '../../stores/stratego-store'
+    import {state} from '../../stores/stratego-store';
+    import {player} from "../../stores/stratego-store";
     import {deserialize} from "../../serializing/deserializer";
     import {Data} from "../../model/data";
     import {constants} from "../../stores/constants-store";
@@ -41,7 +42,6 @@
         }
         $state.playerToMove = values[3]
         $state.data = data
-        console.log(data)
         $state.pieceChosen = null
     }
 
@@ -65,7 +65,6 @@
             "toY":toY
         }
         let jsonRequest = JSON.stringify(requestObject)
-        console.log(jsonRequest)
         const params = {
             headers: {
                 'Accept': "application/json, text/plain, */*",
@@ -81,6 +80,18 @@
     }
 
     function move() {
+        if ($player.playerSide !== 'B' && $player.playerSide !== 'R') {
+            $state.moveText = 'You are a spectator. You are not allowed to move pieces...';
+            return;
+        }
+        if ($state.pieceChosen === null && getPlayerSide(pieceBorderColor) !== $player.playerSide) {
+            $state.moveText = 'You can only move pieces you control...';
+            return;
+        }
+        if ($player.playerSide !== $state.playerToMove) {
+            $state.moveText = 'It is not your turn to move...';
+            return;
+        }
         if ($state.pieceChosen === null) {
             toggleChosenBackground()
             $state.pieceChosen = new Piece(value, playerColor, x, y)
@@ -89,8 +100,6 @@
                 toggleChosenBackground()
                 $state.pieceChosen = null
             } else {
-                let playerSide = getPlayerSide($state.pieceChosen.player)
-                console.log(playerSide)
                 movePiece($state.playerToMove, $state.pieceChosen.x, $state.pieceChosen.y, x, y)
                     .then(() => getLatestBoard($state.pieceChosen.x, $state.pieceChosen.y))
             }
@@ -129,10 +138,8 @@
     $: pieceBorderColor, dynamicallyChangePieceBorderColor()
 
     $: if ($state.data[x][y].selected) {
-        console.log("It IS SELECTED")
         backgroundColor = yellow
     } else {
-        console.log("It is NOT SELECTED")
         backgroundColor = white
     }
 </script>

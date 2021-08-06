@@ -1,6 +1,5 @@
 export function deserialize(input) {
-    // input = "5~2@F~B~E~5~5~T~5~5~B~F@B~B~E~B~B~E~R~R~R~R@B"
-    console.log("Input array: " + input)
+    console.log("To deserialize: " + input)
     let boardArray = []
     let playersArray = []
 
@@ -28,10 +27,6 @@ export function deserialize(input) {
         }
         playersArray.push(tempRow)
     }
-
-    console.log("new board: " + boardArray.toString())
-    console.log("new players: " + playersArray.toString())
-    console.log("current player: " + currentPlayer.toString())
 
     return [dimensions, boardArray, playersArray, currentPlayer]
 }
